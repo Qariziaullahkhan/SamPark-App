@@ -12,26 +12,28 @@ class AuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Mysize(
-              height: 48.h,
-            ),
-            Center(
-              child: Image.asset(AssetsImages.logoPNG),
-            ),
-            Mysize(
-              height: 4.h,
-            ),
-            Text(
-              AppsStrings.appName,
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            Mysize(
-              height: 81.h,
-            ),
-            AuthPageBody(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Mysize(
+                height: 48.h,
+              ),
+              Center(
+                child: Image.asset(AssetsImages.logoPNG),
+              ),
+              Mysize(
+                height: 4.h,
+              ),
+              Text(
+                AppsStrings.appName,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              Mysize(
+                height: 81.h,
+              ),
+              AuthPageBody(),
+            ],
+          ),
         ),
       ),
     );

@@ -10,6 +10,7 @@ var darkthem = ThemeData(
       primary: lgprimarycolor,
       onPrimary: lgwhitecolor,
       primaryContainer: lgiconcolor,
+      secondary: lgbluecolor,
       onPrimaryContainer: lgcontainercolor),
   textTheme: TextTheme(
     headlineLarge: GoogleFonts.poppins(
@@ -31,6 +32,11 @@ var darkthem = ThemeData(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: lgwhitecolor,
+    ),
+    bodyMedium: GoogleFonts.poppins(
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      color: lgbluecolor,
     ),
   ),
 );
