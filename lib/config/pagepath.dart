@@ -4,6 +4,7 @@ import 'package:sampark_app/pages/auth/auth_page.dart';
 import 'package:sampark_app/pages/chat/caht_page.dart';
 import 'package:sampark_app/pages/home/home.dart';
 import 'package:sampark_app/pages/profile/profile.dart';
+import 'package:sampark_app/pages/profile/update_profile.dart';
 
 var pagepath = [
   GetPage(
@@ -22,5 +23,9 @@ var pagepath = [
   GetPage(
       name: "/profilepage",
       page: () => Profile(),
+      transition: Transition.rightToLeft),
+  GetPage(
+      name: "/updateprofile",
+      page: () => UpdateProfile(),
       transition: Transition.rightToLeft),
 ];

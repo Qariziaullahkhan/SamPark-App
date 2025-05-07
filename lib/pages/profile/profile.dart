@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:sampark_app/config/colors.dart';
 import 'package:sampark_app/config/images.dart';
+import 'package:sampark_app/controller/auth_controller.dart';
 import 'package:sampark_app/widgets/mysize.dart';
 
 class Profile extends StatelessWidget {
@@ -9,9 +11,18 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
         title: Text("Profile"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed('/updateprofile');
+              },
+              icon: const Icon(Icons.edit)),
+        ],
       ),
       body: Column(
         children: [
@@ -66,7 +77,7 @@ class Profile extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(15.sp),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.background,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(15.r),
                             ),
                             child: Row(
@@ -91,7 +102,7 @@ class Profile extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(15.sp),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.background,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(15.r),
                             ),
                             child: Row(
@@ -116,7 +127,7 @@ class Profile extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.all(15.sp),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.background,
+                              color: Theme.of(context).colorScheme.surface,
                               borderRadius: BorderRadius.circular(15.r),
                             ),
                             child: Row(
@@ -143,6 +154,21 @@ class Profile extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Spacer(),
+          SizedBox(
+            child: TextButton(
+              onPressed: () async {
+                await authController.logoutuser();
+              },
+              child: Text(
+                "Log Out",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: lgprimarycolor),
+              ),
             ),
           )
         ],

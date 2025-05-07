@@ -14,12 +14,12 @@ class SignUpForm extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h),
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             // Name Field
@@ -101,7 +101,7 @@ class SignUpForm extends StatelessWidget {
                         PrimaryButton(
                           text: "Sign Up",
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               authController.createUser(emailController.text,
                                   passwordController.text);
                               Get.toNamed("/homepage");
