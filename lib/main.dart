@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(393, 852),
       child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: AppsStrings.appName,
         theme: lighttheme,
         darkTheme: darkthem,

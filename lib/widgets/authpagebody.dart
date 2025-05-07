@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sampark_app/config/strings.dart';
+import 'package:sampark_app/pages/auth/login_form.dart';
+import 'package:sampark_app/pages/auth/signup_form.dart';
 
 class AuthPageBody extends StatelessWidget {
   const AuthPageBody({super.key});
@@ -90,70 +92,14 @@ class AuthPageBody extends StatelessWidget {
             ),
 
             // Form Content
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 30.h),
-                child: Column(
-                  children: [
-                    // Email Field
-                    TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        labelText: 'Email',
-                        fillColor: Color(0xFF191B28),
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
-
-                    // Password Field
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.password),
-                        fillColor: Color(0xFF191B28),
-                        filled: true,
-                        labelText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.r),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 30.h),
-
-                    // Login Button
-                    SizedBox(
-                      width: double.infinity,
-                      height: 45.h,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          islogin.value
-                              ? AppsStrings.login.toUpperCase()
-                              : AppsStrings.signup.toUpperCase(),
-                          style:
-                              Theme.of(context).textTheme.labelLarge?.copyWith(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            Obx(() => islogin.value ? LoginForm() : SignUpForm()),
           ],
         ),
       ),
+
+      // loginform
+
+      // loginform
     );
   }
 }
