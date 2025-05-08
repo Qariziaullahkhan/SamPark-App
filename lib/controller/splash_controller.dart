@@ -13,9 +13,9 @@ class SplashController extends GetxController {
   Future<void> splashHande() async {
     await Future.delayed(Duration(seconds: 3));
     if (auth.currentUser == null) {
-      Get.offAllNamed('/authpage');
+      Get.offAllNamed('/authpage'); // user not logged in
     } else {
-      Get.offAllNamed('/homepage');
+      Get.offAllNamed('/homepage'); // user is logged in
     }
   }
 }

@@ -12,12 +12,12 @@ class LoginForm extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h),
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             SizedBox(height: 36.h),
@@ -78,7 +78,7 @@ class LoginForm extends StatelessWidget {
                         PrimaryButton(
                           text: "Login",
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               authController.login(emailController.text,
                                   passwordController.text);
                               Get.toNamed("/homepage");

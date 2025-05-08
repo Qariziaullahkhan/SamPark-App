@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:sampark_app/config/colors.dart';
 import 'package:sampark_app/config/images.dart';
 import 'package:sampark_app/config/strings.dart';
@@ -61,9 +60,9 @@ class SplashPages extends StatelessWidget {
                 height: 50.h,
               ),
               SlideAction(
-                onSubmit: () {
-                  Get.toNamed("/authpage");
-                },
+                // onSubmit: () {
+                //   Get.toNamed("/authpage");
+                // },
                 text: "Slide to Continue",
                 textStyle: Theme.of(context).textTheme.bodySmall,
                 sliderRotate: false,

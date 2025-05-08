@@ -1,177 +1,147 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sampark_app/config/colors.dart';
-import 'package:sampark_app/config/images.dart';
-import 'package:sampark_app/controller/auth_controller.dart';
+import 'package:sampark_app/controller/profile_controller.dart';
 import 'package:sampark_app/widgets/mysize.dart';
+import 'package:sampark_app/widgets/primary_button.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
+    ProfileController profileController = Get.put(ProfileController());
+    RxBool isedit = false.obs;
+    TextEditingController nameController =
+        TextEditingController(text: profileController.currentUser.value.name);
+    TextEditingController emailController = TextEditingController();
+    TextEditingController phoneController =
+        TextEditingController(text: profileController.currentUser.value.phone);
+    TextEditingController aboutController =
+        TextEditingController(text: profileController.currentUser.value.about);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-        title: Text("Profile"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Get.toNamed('/updateprofile');
-              },
-              icon: const Icon(Icons.edit)),
-        ],
+        title: const Text("Profile"),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 18.h, vertical: 10.h),
-            padding: EdgeInsets.all(15.sp),
-            width: double.infinity,
-            height: 250.h,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            AssetsImages.girlimages,
-                            height: 80.h,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("malikziakhan0315@gmail.com",
-                              style: Theme.of(context).textTheme.bodyLarge),
-                        ],
-                      ),
-                      Mysize(
-                        height: 5.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Malik Zia Khan",
-                              style: Theme.of(context).textTheme.bodySmall),
-                        ],
-                      ),
-                      Mysize(
-                        height: 15.h,
-                      ),
-                      Row(
-                        // This is the only changed section
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15.sp),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.circular(15.r),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Mysize(
+                          height: 20.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 80.r,
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surface,
+                              child: Icon(
+                                Icons.image,
+                              ),
                             ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.phone,
-                                  color: lgbluecolor,
-                                  size: 20.w,
-                                ),
-                                Mysize(width: 15.w),
-                                Text(
-                                  "Call",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(color: lgbluecolor),
-                                )
-                              ],
+                          ],
+                        ),
+                        Mysize(
+                          height: 10.h,
+                        ),
+                        Obx(
+                          () => TextField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              enabled: isedit.value,
+                              filled: isedit.value,
+                              hintText: "Name",
+                              labelText: "Name",
+                              prefixIcon: Icon(Icons.person),
                             ),
                           ),
-                          Mysize(width: 5.w),
-                          Container(
-                            padding: EdgeInsets.all(15.sp),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.circular(15.r),
-                            ),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  AssetsImages.logoPNG,
-                                  width: 20.w,
-                                  color: lgprimarycolor,
-                                ),
-                                Mysize(width: 15.w),
-                                Text(
-                                  "Chat",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(color: lgprimarycolor),
-                                )
-                              ],
+                        ),
+                        Mysize(height: 10.h), // Added gap
+                        Obx(
+                          () => TextField(
+                            controller: aboutController,
+                            decoration: InputDecoration(
+                              enabled: isedit.value,
+                              filled: isedit.value,
+                              hintText: "About",
+                              labelText: "About",
+                              prefixIcon: Icon(Icons.info),
                             ),
                           ),
-                          Mysize(width: 5.w),
-                          Container(
-                            padding: EdgeInsets.all(15.sp),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.circular(15.r),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.call,
-                                  color: lgredcolor,
-                                  size: 20.w,
-                                ),
-                                Mysize(width: 5.w),
-                                Text(
-                                  "Delete",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(color: lgredcolor),
-                                )
-                              ],
+                        ),
+                        Mysize(height: 10.h), // Added gap
+                        TextField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            enabled: isedit.value,
+                            filled: isedit.value,
+                            hintText: "Email",
+                            labelText: "Email",
+                            prefixIcon: Icon(Icons.person),
+                          ),
+                        ),
+                        Mysize(height: 10.h), // Added gap
+                        Obx(
+                          () => TextField(
+                            controller: phoneController,
+                            decoration: InputDecoration(
+                              enabled: isedit.value,
+                              filled: isedit.value,
+                              hintText: "Phone",
+                              labelText: "Phone",
+                              prefixIcon: Icon(Icons.phone),
                             ),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Spacer(),
-          SizedBox(
-            child: TextButton(
-              onPressed: () async {
-                await authController.logoutuser();
-              },
-              child: Text(
-                "Log Out",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(color: lgprimarycolor),
+                        ),
+                        Mysize(
+                          height: 20.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Obx(
+                              () => isedit.value
+                                  ? PrimaryButton(
+                                      text: "Save",
+                                      onPressed: () {
+                                        isedit.value = false;
+                                      },
+                                      icon: Icons.save,
+                                    )
+                                  : PrimaryButton(
+                                      text: "Edit",
+                                      onPressed: () {
+                                        isedit.value = true;
+                                      },
+                                      icon: Icons.edit,
+                                    ),
+                            )
+                          ],
+                        ),
+                        Mysize(
+                          height: 20.h,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

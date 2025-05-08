@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sampark_app/widgets/mysize.dart';
 
-class UpdateProfile extends StatelessWidget {
-  const UpdateProfile({super.key});
+class UserUpdateProfile extends StatelessWidget {
+  const UserUpdateProfile({super.key});
 
   @override
   Widget build(BuildContext context) {

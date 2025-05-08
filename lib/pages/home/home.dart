@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sampark_app/controller/profile_controller.dart';
 import 'package:sampark_app/pages/chat/chat_list.dart';
 import 'package:sampark_app/widgets/tab_bar.dart';
 import 'package:sampark_app/config/images.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    ProfileController profileController = Get.put(ProfileController());
     return DefaultTabController(
       length: 3, // number of tabs
       child: Scaffold(
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             IconButton(
                 onPressed: () {
-                  Get.toNamed('/profilepage');
+                  Get.toNamed('/userprofilepage');
                 },
                 icon: const Icon(Icons.more_vert_outlined)),
           ],

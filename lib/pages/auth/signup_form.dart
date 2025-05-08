@@ -102,8 +102,11 @@ class SignUpForm extends StatelessWidget {
                           text: "Sign Up",
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              authController.createUser(emailController.text,
-                                  passwordController.text);
+                              authController.createUser(
+                                emailController.text,
+                                passwordController.text,
+                                nameController.text,
+                              );
                               Get.toNamed("/homepage");
                             }
                           },
