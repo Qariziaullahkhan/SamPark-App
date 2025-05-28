@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sampark_app/controller/imagepick_controller.dart';
 import 'package:sampark_app/controller/profile_controller.dart';
 import 'package:sampark_app/widgets/mysize.dart';
 import 'package:sampark_app/widgets/primary_button.dart';
@@ -19,6 +22,8 @@ class Profile extends StatelessWidget {
         TextEditingController(text: profileController.currentUser.value.phone);
     TextEditingController aboutController =
         TextEditingController(text: profileController.currentUser.value.about);
+    ImagepickController imagepickController = Get.put(ImagepickController());
+    RxString imagepath = "".obs;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profile"),
@@ -44,14 +49,60 @@ class Profile extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CircleAvatar(
-                              radius: 80.r,
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.surface,
-                              child: Icon(
-                                Icons.image,
-                              ),
-                            ),
+                            Obx(() => isedit.value
+                                ? InkWell(
+                                    onTap: () async {
+                                      imagepath.value =
+                                          await imagepickController.pickImage();
+                                      await profileController.uploadImage(
+                                        imagepath.value,
+                                        // nameController.text,
+                                        // aboutController.text,
+                                        // phoneController.text,
+                                      );
+                                      print("Image path: $imagepath");
+                                    },
+                                    child: Container(
+                                      height: 200.h,
+                                      width: 200.w,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
+                                        borderRadius:
+                                            BorderRadius.circular(100.r),
+                                      ),
+                                      child: imagepath.value == ""
+                                          ? Icon(Icons.add)
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100.r),
+                                              child: Image.file(
+                                                File(imagepath.value),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                    ))
+                                : Container(
+                                    height: 200.h,
+                                    width: 200.w,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      borderRadius:
+                                          BorderRadius.circular(100.r),
+                                    ),
+                                    child: imagepath.value == ""
+                                        ? Icon(Icons.image)
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100.r),
+                                            child: Image.file(
+                                              File(imagepath.value),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                  ))
                           ],
                         ),
                         Mysize(
@@ -118,6 +169,7 @@ class Profile extends StatelessWidget {
                                       text: "Save",
                                       onPressed: () {
                                         isedit.value = false;
+                                        print(imagepath.value);
                                       },
                                       icon: Icons.save,
                                     )

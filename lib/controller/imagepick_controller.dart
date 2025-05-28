@@ -6,9 +6,9 @@ class ImagepickController extends GetxController {
   Future<String> pickImage() async {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      // print(image.path);
+      return image.path;
     } else {
-      // print("Image not picked");
+      print("Image not picked");
     }
     return "";
   }
