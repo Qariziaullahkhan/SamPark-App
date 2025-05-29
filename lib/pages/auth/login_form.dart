@@ -77,11 +77,12 @@ class LoginForm extends StatelessWidget {
                       children: [
                         PrimaryButton(
                           text: "Login",
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              authController.login(emailController.text,
+                              await authController.login(emailController.text,
                                   passwordController.text);
-                              Get.toNamed("/homepage");
+                              Get.offAllNamed('/homepage'); // ✅ This is correct
+                              print("Login Success");
                             }
                           },
                           icon: Icons.lock_open_sharp,

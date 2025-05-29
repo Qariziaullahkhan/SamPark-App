@@ -35,7 +35,19 @@ class ChatTitle extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(imageUrl, width: 50.w, height: 50.h),
+                SizedBox(
+                  width: 70.w,
+                  height: 70.h,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(35.r),
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      width: 70.w,
+                      height: 70.h,
+                    ),
+                  ),
+                ),
                 Mysize(width: 10.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

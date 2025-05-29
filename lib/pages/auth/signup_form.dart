@@ -100,9 +100,9 @@ class SignUpForm extends StatelessWidget {
                       children: [
                         PrimaryButton(
                           text: "Sign Up",
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              authController.createUser(
+                              await authController.createUser(
                                 emailController.text,
                                 passwordController.text,
                                 nameController.text,

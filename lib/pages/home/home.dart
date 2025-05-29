@@ -52,7 +52,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed('/contactpage');
+          },
           backgroundColor: Theme.of(context).colorScheme.primary,
           child: const Icon(
             Icons.add,

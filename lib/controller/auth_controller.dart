@@ -60,7 +60,17 @@ class AuthController extends GetxController {
 
   /// user
   Future<void> adduser(String email, String name, String uid) async {
-    var newuser = UserModel(email: email, name: name, id: uid);
+    var newuser = UserModel(
+        id: uid,
+        name: name,
+        email: email,
+        profileImage: '', // Add default empty string
+        phone: '', // Add default empty string
+        about: '', // Add default empty string
+        createdAt: DateTime.now().toString(), // Add current timestamp
+        status: 'offline' // Add default status
+        );
+
     try {
       await db.collection("users").doc(uid).set(newuser.toJson());
     } catch (ex) {

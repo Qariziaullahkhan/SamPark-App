@@ -15,9 +15,11 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     ProfileController profileController = Get.put(ProfileController());
     RxBool isedit = false.obs;
+
     TextEditingController nameController =
         TextEditingController(text: profileController.currentUser.value.name);
-    TextEditingController emailController = TextEditingController();
+    TextEditingController emailController =
+        TextEditingController(text: profileController.currentUser.value.email);
     TextEditingController phoneController =
         TextEditingController(text: profileController.currentUser.value.phone);
     TextEditingController aboutController =
@@ -49,20 +51,44 @@ class Profile extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Obx(() => isedit.value
-                                ? InkWell(
-                                    onTap: () async {
-                                      imagepath.value =
-                                          await imagepickController.pickImage();
-                                      await profileController.uploadImage(
-                                        imagepath.value,
-                                        // nameController.text,
-                                        // aboutController.text,
-                                        // phoneController.text,
-                                      );
-                                      print("Image path: $imagepath");
-                                    },
-                                    child: Container(
+                            Obx(
+                              () => isedit.value
+                                  ? InkWell(
+                                      onTap: () async {
+                                        imagepath.value =
+                                            await imagepickController
+                                                .pickImage();
+                                        await profileController.uploadImage(
+                                          imagepath.value,
+                                          // nameController.text,
+                                          // aboutController.text,
+                                          // phoneController.text,
+                                        );
+                                        print("Image path: $imagepath");
+                                      },
+                                      child: Container(
+                                        height: 200.h,
+                                        width: 200.w,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          borderRadius:
+                                              BorderRadius.circular(100.r),
+                                        ),
+                                        child: imagepath.value == ""
+                                            ? Icon(Icons.add)
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        100.r),
+                                                child: Image.file(
+                                                  File(imagepath.value),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                      ))
+                                  : Container(
                                       height: 200.h,
                                       width: 200.w,
                                       decoration: BoxDecoration(
@@ -72,37 +98,24 @@ class Profile extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(100.r),
                                       ),
-                                      child: imagepath.value == ""
-                                          ? Icon(Icons.add)
+                                      child: profileController.currentUser.value
+                                                      .profileImage ==
+                                                  null ||
+                                              profileController.currentUser
+                                                      .value.profileImage ==
+                                                  ""
+                                          ? Icon(Icons.image)
                                           : ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(100.r),
-                                              child: Image.file(
-                                                File(imagepath.value),
+                                              child: Image.network(
+                                                profileController.currentUser
+                                                    .value.profileImage!,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
-                                    ))
-                                : Container(
-                                    height: 200.h,
-                                    width: 200.w,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      borderRadius:
-                                          BorderRadius.circular(100.r),
                                     ),
-                                    child: imagepath.value == ""
-                                        ? Icon(Icons.image)
-                                        : ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100.r),
-                                            child: Image.file(
-                                              File(imagepath.value),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                  ))
+                            ),
                           ],
                         ),
                         Mysize(
@@ -160,29 +173,37 @@ class Profile extends StatelessWidget {
                         Mysize(
                           height: 20.h,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Obx(
-                              () => isedit.value
-                                  ? PrimaryButton(
-                                      text: "Save",
-                                      onPressed: () {
-                                        isedit.value = false;
-                                        print(imagepath.value);
-                                      },
-                                      icon: Icons.save,
-                                    )
-                                  : PrimaryButton(
-                                      text: "Edit",
-                                      onPressed: () {
-                                        isedit.value = true;
-                                      },
-                                      icon: Icons.edit,
-                                    ),
-                            )
-                          ],
-                        ),
+                        profileController.isloading.value
+                            ? CircularProgressIndicator()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Obx(
+                                    () => isedit.value
+                                        ? PrimaryButton(
+                                            text: "Save",
+                                            onPressed: () async {
+                                              await profileController
+                                                  .updateprofile(
+                                                      imagepath.value,
+                                                      nameController.text,
+                                                      aboutController.text,
+                                                      phoneController.text);
+                                              isedit.value = false;
+                                              print(imagepath.value);
+                                            },
+                                            icon: Icons.save,
+                                          )
+                                        : PrimaryButton(
+                                            text: "Edit",
+                                            onPressed: () {
+                                              isedit.value = true;
+                                            },
+                                            icon: Icons.edit,
+                                          ),
+                                  )
+                                ],
+                              ),
                         Mysize(
                           height: 20.h,
                         ),

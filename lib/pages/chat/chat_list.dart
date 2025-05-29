@@ -12,49 +12,49 @@ class ChatList extends StatelessWidget {
       child: ListView(
         children: [
           ChatTitle(
-            imageUrl: AssetsImages.boyimages, // Use your actual asset path
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
             time: "10:30 AM",
           ),
           const ChatTitle(
-            imageUrl: AssetsImages.girlimages,
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
             time: "Yesterday",
           ),
           ChatTitle(
-            imageUrl: AssetsImages.boyimages, // Use your actual asset path
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
             time: "10:30 AM",
           ),
           const ChatTitle(
-            imageUrl: AssetsImages.girlimages,
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
             time: "Yesterday",
           ),
           ChatTitle(
-            imageUrl: AssetsImages.boyimages, // Use your actual asset path
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
             time: "10:30 AM",
           ),
           const ChatTitle(
-            imageUrl: AssetsImages.girlimages,
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
             time: "Yesterday",
           ),
           ChatTitle(
-            imageUrl: AssetsImages.boyimages, // Use your actual asset path
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
             time: "10:30 AM",
           ),
           const ChatTitle(
-            imageUrl: AssetsImages.girlimages,
+            imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
             time: "Yesterday",

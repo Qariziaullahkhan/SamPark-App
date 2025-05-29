@@ -41,21 +41,43 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> uploadImage(
-    String? imageUrl,
-  ) async {
+  Future<String> uploadImage(String imageUrl) async {
     isloading.value = true;
-    final path = 'file/${imageUrl}';
-    final file = File(imageUrl!);
-    if (imageUrl != null) {
-      try {
-        final ref = store.ref().child(path).putFile(file);
-        final uploadTask = await ref.whenComplete(() {});
-        final downloadimageurl = await uploadTask.ref.getDownloadURL();
-        print(downloadimageurl);
-      } catch (e) {
-        print(e);
-      }
+    final path = 'file/$imageUrl';
+    final file = File(imageUrl);
+
+    try {
+      final ref = store.ref().child(path).putFile(file);
+      final uploadTask = await ref.whenComplete(() {});
+      final downloadImageUrl = await uploadTask.ref.getDownloadURL();
+      return downloadImageUrl;
+    } catch (e) {
+      return ''; // Return an empty string or handle it appropriately
+    }
+  }
+
+  Future<void> updateprofile(
+      String imageUrl, String name, String about, String number) async {
+    isloading.value = true;
+    try {
+      final imageLink = await uploadImage(imageUrl);
+      final updateduser = UserModel(
+        id: auth.currentUser!.uid,
+        email: auth.currentUser!.email,
+        name: name,
+        about: about,
+        phone: number,
+        profileImage: imageLink,
+      );
+      await db
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .set(updateduser.toJson());
+      await getUserdetails();
+      isloading.value = false;
+      print("image link ");
+    } catch (e) {
+      print(e.toString());
     }
   }
 }
