@@ -21,8 +21,9 @@ class ContactController extends GetxController {
     try {
       userList.clear();
       await db.collection("users").get().then((value) {
-        userList.value =
-            value.docs.map((e) => UserModel.fromJson(e.data())).toList();
+        userList.value = value.docs
+            .map((value) => UserModel.fromJson(value.data()))
+            .toList();
       });
     } catch (e) {
       print(e.toString());

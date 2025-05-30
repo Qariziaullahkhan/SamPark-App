@@ -68,6 +68,9 @@ class ProfileController extends GetxController {
         about: about,
         phone: number,
         profileImage: imageLink,
+        createdAt: currentUser.value.createdAt,
+        lastOnlineStatus: currentUser.value.lastOnlineStatus,
+        status: currentUser.value.status,
       );
       await db
           .collection("users")

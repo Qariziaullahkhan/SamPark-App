@@ -4,8 +4,7 @@ import 'package:get/get.dart';
 import 'package:sampark_app/config/images.dart';
 import 'package:sampark_app/controller/chat_controller.dart';
 import 'package:sampark_app/controller/contact_controller.dart';
-import 'package:sampark_app/models/user_model.dart';
-import 'package:sampark_app/pages/chat/caht_page.dart';
+import 'package:sampark_app/pages/chat/chat_page.dart';
 import 'package:sampark_app/pages/chat/chat_title.dart';
 import 'package:sampark_app/widgets/contact.dart';
 import 'package:sampark_app/widgets/mysize.dart';
@@ -84,22 +83,20 @@ class ContactPage extends StatelessWidget {
             Obx(
               () => Column(
                   children: contactController.userList
-                      .map((e) => InkWell(
+                      .map((value) => InkWell(
                             onTap: () {
-                              Get.to(Get.to(ChatPage(usermodel: UserModel())));
-
-                              // Pass the actual user model
-                              // Get.toNamed('/chatpage',
-                              //     arguments: UserModel(
-                              //       name: e.name,
-                              //     ));
+                              Get.toNamed('/chatpage', arguments: value);
+                              String roomId =
+                                  chatController.getRoomId(value.id!);
+                              print(roomId);
+                              print("user tapped ${value.name}");
                             },
                             child: ChatTitle(
-                              imageUrl:
-                                  e.profileImage ?? AssetsImages.defaultprofile,
-                              name: e.name ?? "",
-                              lastChat: e.about ?? " No Message",
-                              time: e.lastOnlineStatus ?? "",
+                              imageUrl: value.profileImage ??
+                                  AssetsImages.defaultprofile,
+                              name: value.name ?? "",
+                              lastChat: value.about ?? " No Message",
+                              lastTime: value.status ?? " No Time",
                             ),
                           ))
                       .toList()),

@@ -14,15 +14,16 @@ class ChatController extends GetxController {
   String getRoomId(String targetUserId) {
     String currentUserId = auth.currentUser!.uid;
     // Consistent room ID generation
-    return currentUserId.compareTo(targetUserId) < 0
-        ? '$currentUserId-$targetUserId'
-        : '$targetUserId-$currentUserId';
+    if (currentUserId[0].codeUnitAt(0) > targetUserId[0].codeUnitAt(0)) {
+      return currentUserId + targetUserId;
+    } else {
+      return targetUserId + currentUserId;
+    }
   }
 
   Future<void> sendMessage(String targetUserId, String message) async {
     isloading.value = true;
     String roomId = getRoomId(targetUserId);
-    print(roomId);
     String chatId = Uuid().v6();
 
     // Add debug print
@@ -34,7 +35,8 @@ class ChatController extends GetxController {
       senderId: auth.currentUser!.uid,
       receiverId: targetUserId,
       sendername: controller.currentUser.value.name,
-      timestamp: DateTime.now().toString(), // Changed to server timestamp
+      timestamp: FieldValue.serverTimestamp()
+          .toString(), // Changed to server timestamp
     );
 
     try {
@@ -61,7 +63,9 @@ class ChatController extends GetxController {
         .snapshots()
         .map((event) {
       print("Fetched ${event.docs.length} messages");
-      return event.docs.map((e) => ChatModel.fromJson(e.data())).toList();
+      return event.docs
+          .map((value) => ChatModel.fromJson(value.data()))
+          .toList();
     });
   }
 }

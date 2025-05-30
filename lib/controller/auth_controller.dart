@@ -60,16 +60,18 @@ class AuthController extends GetxController {
 
   /// user
   Future<void> adduser(String email, String name, String uid) async {
+    var now = DateTime.now();
     var newuser = UserModel(
-        id: uid,
-        name: name,
-        email: email,
-        profileImage: '', // Add default empty string
-        phone: '', // Add default empty string
-        about: '', // Add default empty string
-        createdAt: DateTime.now().toString(), // Add current timestamp
-        status: 'offline' // Add default status
-        );
+      id: uid,
+      name: name,
+      email: email,
+      profileImage: '',
+      phone: '',
+      about: 'Hey there! I’m using Sampark',
+      createdAt: now.toIso8601String(), // ✅ Firestore timestamp
+      status: 'offline',
+      lastOnlineStatus: 'No Time Yet', // ✅ Add this
+    );
 
     try {
       await db.collection("users").doc(uid).set(newuser.toJson());

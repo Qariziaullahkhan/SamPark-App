@@ -1,13 +1,13 @@
 class UserModel {
-  String? id;
-  String? name;
-  String? email;
-  String? profileImage;
-  String? phone;
-  String? about;
-  String? createdAt;
-  String? lastOnlineStatus;
-  String? status;
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? profileImage;
+  final String? phone;
+  final String? about;
+  final String? createdAt;
+  final String? lastOnlineStatus;
+  final String? status;
 
   UserModel({
     this.id,
@@ -21,16 +21,18 @@ class UserModel {
     this.status,
   });
 
-  UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    profileImage = json['profileImage'] ?? json['ProfileImage'];
-    phone = json['phone'];
-    about = json['about'];
-    createdAt = json['createdAt'];
-    lastOnlineStatus = json['lastOnlineStatus'];
-    status = json['status'];
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      profileImage: json['ProfileImage'],
+      phone: json['phone'],
+      about: json['about'],
+      createdAt: json['createdAt'],
+      lastOnlineStatus: json['lastOnlineStatus'],
+      status: json['status'],
+    );
   }
 
   Map<String, dynamic> toJson() {

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sampark_app/models/user_model.dart';
 import 'package:sampark_app/pages/auth/auth_page.dart';
-import 'package:sampark_app/pages/chat/caht_page.dart';
+import 'package:sampark_app/pages/chat/chat_page.dart';
 import 'package:sampark_app/pages/contactpage/contact_page.dart';
 import 'package:sampark_app/pages/home/home.dart';
 import 'package:sampark_app/pages/userprofile/user_profile.dart';
@@ -34,7 +34,7 @@ var pagepath = [
     page: () {
       final UserModel user =
           Get.arguments ?? UserModel(id: "default_id", name: "Unknown User");
-      return ChatPage(usermodel: user);
+      return ChatPage(userModel: user);
     },
     transition: Transition.leftToRight,
   )

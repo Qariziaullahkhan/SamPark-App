@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'package:sampark_app/widgets/mysize.dart';
 
 class ChatTitle extends StatelessWidget {
   final String imageUrl;
   final String name;
   final String lastChat;
-  final String time;
+  final String lastTime;
 
   const ChatTitle({
     super.key,
     required this.imageUrl,
     required this.name,
     required this.lastChat,
-    required this.time,
+    required this.lastTime,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/chatpage');
+        // Get.to(() => ChatPage(
+        //         usermodel: UserModel(
+        //       name: name,
+        //     )));
+        // Get.toNamed('/chatpage');
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 15),
         padding: const EdgeInsets.all(6.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          color: Color(0xFF34374B),
+          // color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +66,7 @@ class ChatTitle extends StatelessWidget {
                 ),
               ],
             ),
-            Text(time, style: Theme.of(context).textTheme.labelMedium),
+            Text(lastTime, style: Theme.of(context).textTheme.labelMedium),
           ],
         ),
       ),

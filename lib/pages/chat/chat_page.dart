@@ -9,15 +9,18 @@ import 'package:sampark_app/models/user_model.dart';
 import 'package:sampark_app/widgets/chat_bubbles.dart';
 
 class ChatPage extends StatelessWidget {
-  final UserModel usermodel;
-  const ChatPage({super.key, required this.usermodel});
+  final UserModel userModel;
+  const ChatPage({
+    super.key,
+    required this.userModel,
+  });
 
   @override
   Widget build(BuildContext context) {
     final messagecontroller = TextEditingController();
     ChatController chatController = Get.put(ChatController());
-    print("User ID: ${usermodel.id}");
-    print("User Name: ${usermodel.name}");
+    print("${userModel.id}");
+    print("${userModel.name}");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -32,10 +35,11 @@ class ChatPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              (usermodel.name != "Unknown User") ? usermodel.name! : "New User",
+              (userModel.name ?? "User"),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            Text("Online", style: Theme.of(context).textTheme.bodySmall),
+            Text(userModel.lastOnlineStatus ?? "No online status",
+                style: Theme.of(context).textTheme.bodySmall),
           ],
         ),
         actions: [
@@ -52,7 +56,7 @@ class ChatPage extends StatelessWidget {
             // In body: Padding(...), replace Column children with:
             Expanded(
               child: StreamBuilder<List<ChatModel>>(
-                stream: chatController.getMessages(usermodel.id ?? ""),
+                stream: chatController.getMessages(userModel.id ?? ""),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
@@ -123,7 +127,7 @@ class ChatPage extends StatelessWidget {
               onTap: () {
                 if (messagecontroller.text.isNotEmpty) {
                   chatController.sendMessage(
-                      usermodel.id!, messagecontroller.text);
+                      userModel.id!, messagecontroller.text);
                   messagecontroller.clear();
                 }
               },

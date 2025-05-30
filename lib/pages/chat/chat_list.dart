@@ -15,49 +15,49 @@ class ChatList extends StatelessWidget {
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
-            time: "10:30 AM",
+            lastTime: "10:30 AM",
           ),
           const ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
-            time: "Yesterday",
+            lastTime: "Yesterday",
           ),
           ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
-            time: "10:30 AM",
+            lastTime: "10:30 AM",
           ),
           const ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
-            time: "Yesterday",
+            lastTime: "Yesterday",
           ),
           ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
-            time: "10:30 AM",
+            lastTime: "10:30 AM",
           ),
           const ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
-            time: "Yesterday",
+            lastTime: "Yesterday",
           ),
           ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "John Doe",
             lastChat: "Hey, how are you?",
-            time: "10:30 AM",
+            lastTime: "10:30 AM",
           ),
           const ChatTitle(
             imageUrl: AssetsImages.defaultprofile, // Use your actual asset path
             name: "Jane Smith",
             lastChat: "Let's meet tomorrow.",
-            time: "Yesterday",
+            lastTime: "Yesterday",
           ),
         ],
       ),
